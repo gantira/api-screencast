@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Screencast\PlaylistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +22,14 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::prefix('playlists')->middleware('permission:create playlist')->group(function() {
+        Route::get('create', [PlaylistController::class, 'create'])->name('playlists.create');
+        Route::get('table', [PlaylistController::class, 'table'])->name('playlists.table');
+    });
+});
 
 require __DIR__.'/auth.php';
