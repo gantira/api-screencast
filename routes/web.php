@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Screencast\TagController;
 use App\Http\Controllers\Screencast\PlaylistController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('{playlist:slug}/edit', [PlaylistController::class, 'edit'])->name('playlists.edit');
         Route::put('{playlist:slug}/edit', [PlaylistController::class, 'update']);
         Route::delete('{playlist:slug}', [PlaylistController::class, 'destroy'])->name('playlists.delete');
+
+    });
+
+    Route::prefix('tags')->middleware('permission:create tags')->group(function () {
+        Route::get('create', [TagController::class, 'create'])->name('tags.create');
+        Route::post('create', [TagController::class, 'store']);
+        Route::get('table', [TagController::class, 'table'])->name('tags.table');
+        Route::get('{tag:slug}/edit', [TagController::class, 'edit'])->name('tags.edit');
+        Route::put('{tag:slug}/edit', [TagController::class, 'update']);
+        Route::delete('{tag:slug}', [TagController::class, 'destroy'])->name('tags.delete');
 
     });
 });
