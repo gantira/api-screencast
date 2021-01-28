@@ -39,7 +39,7 @@
     <select multiple name="tags[]" id="tags" class="w-full mt-2 border border-gray-300 focus:border-blue-500
     focus:outline-none rounded-lg px-3 focus:ring focus:ring-blue-200 transition duration-200">
         @foreach ($tags as $item)
-            <option value="{{ $item->id }}">{{ $item->name }}</option>
+            <option {{ $playlist->tags()->find($item->id) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
         @endforeach
     </select>
 </div>

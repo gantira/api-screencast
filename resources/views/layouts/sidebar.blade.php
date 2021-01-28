@@ -6,7 +6,7 @@
         <a href="#" class="block text-gray-200 p-2">Dashboard</a>
     </div>
 
-    @can('create playlist')
+    @can('create playlists')
     <div class="mb-8">
         <header class="font-medium px-2 text-gray-400 uppercase text-xs">
             Playlist
