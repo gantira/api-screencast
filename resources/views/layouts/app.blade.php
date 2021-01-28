@@ -16,11 +16,17 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-white">
         <div class="flex">
             @include('layouts.sidebar')
+
             <!-- Page Content -->
-            <main class="w-4/5 p-5"> 
+            <main class="w-4/5 p-5">
+                @isset ($header)
+                    <h1 class="font-light mb-5 text-2xl">{{ $header }}</h1>
+                    <div class="w-20 bg-blue-500 h-1 mt-2 mb-5 rounded-full"></div>
+                @endisset
+
                 {{ $slot }}
             </main>
         </div>
