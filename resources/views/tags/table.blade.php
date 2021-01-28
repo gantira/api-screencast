@@ -14,7 +14,10 @@
                 <x-td>{{ $index + $tags->firstItem() }}</x-td>
                 <x-td>{{ $item->name }}</x-td>
                 <x-td>{{ $item->playlists_count }}</x-td>
-                <x-td>Edit</x-td>
+                <x-td>
+                    <a class="mr-2 text-blue-500 hover:text-blue-600 font-medium underline uppercase text-xs"
+                        href="{{ route('tags.edit', $item->slug) }}">Edit</a>
+                </x-td>
             </tr>
         @endforeach
     </x-table>
