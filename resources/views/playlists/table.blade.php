@@ -18,7 +18,14 @@
         @foreach ($playlists as $index => $item)
             <tr class="hover:bg-gray-200">
                 <x-td>{{ $index + $playlists->firstItem() }}</x-td>
-                <x-td>{{ $item->name }}</x-td>
+                <x-td>
+                    <div>
+                        <div>{{ $item->name }}</div>
+                    </div>
+                    @foreach ($item->tags as $tag)
+                        <span class="mr-1 text-xs">{{ $tag->name }}</span>
+                    @endforeach
+                </x-td>
                 <x-td>{{ $item->created_at->format('d F, Y') }}</x-td>
                 <x-td>
                     <div class="flex items-center">
