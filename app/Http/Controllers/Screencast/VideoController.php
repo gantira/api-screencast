@@ -12,6 +12,8 @@ class VideoController extends Controller
 {
     public function create(Playlist $playlist)
     {
+        $this->authorize('update', $playlist);
+
         return view('videos.create', [
             'playlist' => $playlist,
             'title' => "New Video {$playlist->name}",
@@ -21,6 +23,8 @@ class VideoController extends Controller
 
     public function store(Playlist $playlist, Request $request)
     {
+        $this->authorize('update', $playlist);
+
         $attr = request()->validate([
             'title' => 'required',
             'episode' => 'required',
