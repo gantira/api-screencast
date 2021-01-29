@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Screencast;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlaylistRequest;
+use App\Http\Resources\Screencast\PlaylistResource;
 use App\Models\Screencast\Playlist;
 use App\Models\Screencast\Tag;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,16 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class PlaylistController extends Controller
 {
+    public function index()
+    {
+        $playlist = Playlist::with('user')
+                ->withCount('videos')
+                ->latest()
+                ->paginate(16);
+
+        return PlaylistResource::collection($playlist);
+    }
+
     public function create()
     {
         return view('playlists.create', [
