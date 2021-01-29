@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('table/{playlist:slug}', [VideoController::class, 'table'])->name('videos.table');
         Route::get('create/into/{playlist:slug}', [VideoController::class, 'create'])->name('videos.create');
         Route::post('create/into/{playlist:slug}', [VideoController::class, 'store']);
+        Route::get('edit/{playlist:slug}/{video:unique_video_id}', [VideoController::class, 'edit'])->name('videos.edit');
+        Route::put('edit/{playlist:slug}/{video:unique_video_id}', [VideoController::class, 'update']);
     });
 
     Route::prefix('tags')->group(function () {

@@ -11,6 +11,7 @@
         <tr>
             <x-th>#</x-th>
             <x-th>Title</x-th>
+            <x-th>Intro</x-th>
             <x-th>Action</x-th>
         </tr>
 
@@ -19,8 +20,13 @@
                 <x-td>{{ $index + $videos->firstItem() }}</x-td>
                 <x-td>{{ $item->title }}</x-td>
                 <x-td>
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
+                    <span class="uppercase font-semibold text-xs">{{ $item->intro ? 'Yes' : 'No' }}</span>
+                </x-td>
+                <x-td>
+                    <a class="text-blue-500 hover:text-blue-600 font-medium underline uppercase text-xs"
+                        href="{{ route('videos.edit', [$playlist, $item->unique_video_id]) }}">Edit</a>
+                    <a class="text-blue-500 hover:text-blue-600 font-medium underline uppercase text-xs"
+                        href="#">Delete</a>
                 </x-td>
             </tr>
         @endforeach
