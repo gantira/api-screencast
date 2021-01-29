@@ -18,6 +18,8 @@ class Playlist extends Model
         'price',
     ];
 
+    protected $withCount = ['videos'];
+
     public function getPictureAttribute()
     {
         return asset('storage/' . $this->thumbnail);
