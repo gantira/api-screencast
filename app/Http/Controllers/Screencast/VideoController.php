@@ -10,6 +10,17 @@ use Illuminate\Support\Str;
 
 class VideoController extends Controller
 {
+    public function table(Playlist $playlist)
+    {
+        $this->authorize('update', $playlist);
+
+        return view('videos.table', [
+            'title' => "Table of {$playlist->name} content",
+            'playlist' => $playlist,
+            'videos' => $playlist->videos()->orderBy('episode')->paginate(20),
+        ]);
+    }
+
     public function create(Playlist $playlist)
     {
         $this->authorize('update', $playlist);

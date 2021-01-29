@@ -20,7 +20,9 @@
                 <x-td>{{ $index + $playlists->firstItem() }}</x-td>
                 <x-td>
                     <div>
-                        <div>{{ $item->name }}</div>
+                        <a href="{{ route('videos.table', $item->slug) }}" class="block text-blue-500 hover:underline">
+                            <div>{{ $item->name }}</div>
+                        </a>
                     </div>
                     @foreach ($item->tags as $tag)
                         <span class="mr-1 text-xs">{{ $tag->name }}</span>
