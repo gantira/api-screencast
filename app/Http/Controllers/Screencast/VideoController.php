@@ -7,6 +7,7 @@ use App\Http\Requests\VideoRequest;
 use App\Http\Resources\Screencast\VideoResource;
 use App\Models\Screencast\Playlist;
 use App\Models\Screencast\Video;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class VideoController extends Controller
@@ -20,7 +21,11 @@ class VideoController extends Controller
 
     public function show(Playlist $playlist, Video $video)
     {
-        return new VideoResource($video);
+        if (Auth::user()->hasBought($playlist) || $video->intro == 1) {
+            return new VideoResource($video);
+        }
+
+        return ['message' => 'You have to buy before watching!'];
     }
 
     public function table(Playlist $playlist)
