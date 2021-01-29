@@ -23,10 +23,36 @@
                     <span class="uppercase font-semibold text-xs">{{ $item->intro ? 'Yes' : 'No' }}</span>
                 </x-td>
                 <x-td>
-                    <a class="text-blue-500 hover:text-blue-600 font-medium underline uppercase text-xs"
-                        href="{{ route('videos.edit', [$playlist, $item->unique_video_id]) }}">Edit</a>
-                    <a class="text-blue-500 hover:text-blue-600 font-medium underline uppercase text-xs"
-                        href="#">Delete</a>
+                    <div class="flex items-center">
+                        <a class="mr-2 text-blue-500 hover:text-blue-600 font-medium underline uppercase text-xs"
+                            href="{{ route('videos.edit', [$playlist, $item->unique_video_id]) }}">Edit</a>
+                        <div x-data="{ modalIsOpen: false }">
+                            <x-modal state="modalIsOpen" x-show="modalIsOpen" title="Are you sure ?">
+                                <div class="mb-5">
+                                    <h4 class="text-lg capitalize">{{ $item->title }}</h4>
+                                    <span class="text-xs uppercase text-gray-600">Episode {{ $item->episode }}
+                                        -
+                                        <span>Runtime: {{ $item->runtime }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <form class="mr-4" method="POST"
+                                        action="{{ route('videos.delete', [$playlist->slug, $item->unique_video_id]) }}">
+                                        @csrf
+                                        @method('delete')
+
+                                        <x-button>
+                                            Yes
+                                        </x-button>
+                                    </form>
+                                    <x-button type="button" @click="modalIsOpen = false">Nope</x-button>
+                                </div>
+                            </x-modal>
+
+                            <button @click="modalIsOpen = true"
+                                class="focus:outline-none text-red-500 hover:text-red-600 font-medium underline uppercase text-xs"
+                                href="{{ route('playlists.edit', $item->slug) }}">Delete</button>
+                        </div>
+                    </div>
                 </x-td>
             </tr>
         @endforeach

@@ -10,4 +10,9 @@ class Video extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'slug', 'unique_video_id', 'runtime', 'episode', 'intro'];
+
+    public function playlist()
+    {
+        return $this->belongsTo(Playlist::class);
+    }
 }
