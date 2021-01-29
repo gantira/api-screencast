@@ -19,7 +19,7 @@ class TagController extends Controller
     {
         return view('tags.table', [
             'title' => 'Tags Table',
-            'tags' => Tag::has('playlists')->withCount('playlists')->latest()->paginate(15),
+            'tags' => Tag::withCount('playlists')->latest()->paginate(15),
         ]);
     }
 
@@ -100,8 +100,11 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->playlists()->detach();
+        $tag->delete();
+
+        return redirect(route('tags.table'));
     }
 }
