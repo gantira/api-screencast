@@ -29,7 +29,9 @@
                 <x-td>{{ $item->created_at->format('d F, Y') }}</x-td>
                 <x-td>
                     <div class="flex items-center">
-                        <a class="mr-2 text-blue-500 hover:text-blue-600 font-medium underline uppercase text-xs"
+                        <a class="text-blue-500 hover:text-blue-600 font-medium underline uppercase text-xs"
+                            href="{{ route('videos.create', $item->slug) }}">Add</a>
+                        <a class="mx-2 text-blue-500 hover:text-blue-600 font-medium underline uppercase text-xs"
                             href="{{ route('playlists.edit', $item->slug) }}">Edit</a>
                         <div x-data="{ modalIsOpen: false }">
                             <x-modal state="modalIsOpen" x-show="modalIsOpen" title="Are you sure ?">

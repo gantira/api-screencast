@@ -19,7 +19,7 @@ class CreateVideosTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('unique_video_id');
-            $table->integer('opisode');
+            $table->integer('episode');
             $table->string('runtime');
             $table->timestamps();
         });
