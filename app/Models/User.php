@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\Screencast\PlaylistController;
 use App\Models\Screencast\Playlist;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -56,6 +55,11 @@ class User extends Authenticatable
 
     public function purchases()
     {
-        return $this->belongsToMany(Playlist::class, 'purchased_playlist', 'user_id', 'playlist_id');
+        return $this->belongsToMany(Playlist::class, 'purchased_playlist', 'user_id', 'playlist_id')->withTimestamps();
+    }
+
+    public function buy(Playlist $playlist)
+    {
+        return $this->purchases()->save($playlist);
     }
 }
